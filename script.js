@@ -8,6 +8,7 @@ const totalnum = document.getElementById('sc');
 let newNum = true;
 let operator;
 let numpending;
+let actualNum;
 
 const upDisplay = (num) => {
     if (newNum) {
@@ -26,23 +27,31 @@ numbers.forEach(number => number.addEventListener('click', insertNum));
 
 const pedingOper = () => operator !== undefined;
 
+const calcPercent = (np) => {
+    let oh = actualNum/100;
+    if (operator === '*' || operator === '/') {
+        return eval(`${np}${operator}${oh}`);
+    }else{
+        return eval(`${np}${operator}(${oh}*numpending)`);
+    }
+};
+
 const calc = () => {
+    actualNum = parseFloat(display.textContent);
     if (pedingOper()) {
-        const actualNum = parseFloat(display.textContent);
         newNum = true;
-        switch (operator) {
-            case '+': upDisplay(numpending + actualNum);
-            break;
 
-            case '-': upDisplay(numpending - actualNum);
-            break;
-
-            case '*': upDisplay(numpending * actualNum);
-            break;
-
-            case '/': upDisplay(numpending / actualNum);
-            break;
+        if (display.textContent.indexOf('%') !== -1){
+            upDisplay(calcPercent(numpending));
+            return;
         }
+
+        upDisplay(eval(`${numpending}${operator}${actualNum}`));
+    }
+
+    if (numpending === undefined && display.textContent.indexOf('%') !== -1) {
+        clearDisplay();
+        upDisplay(actualNum / 100);
     }
 };
 
@@ -63,6 +72,8 @@ const activateEqual = () => {
 };
 document.getElementById('equals').addEventListener('click', activateEqual);
 
+const clearDisplay = () => display.textContent = '';
+
 const clearCalc = () => {
     display.textContent = '';
     numpending = undefined;
@@ -79,7 +90,6 @@ document.getElementById('del').addEventListener('click', deleteLastNum);
 const invertNum = () => {
     newNum = true;
     display.textContent = display.textContent * -1;
-    console.log(display.textContent);
 };
 document.getElementById('invert').addEventListener('click', invertNum);
 
@@ -94,6 +104,16 @@ const insertDec = () => {
     }
 };
 document.getElementById('decimal').addEventListener('click', insertDec);
+
+const existsPer = () => display.textContent.indexOf('%') !== -1;
+
+const insertPercent = () => {
+    if(!existsPer()) {
+        existsNum() ? upDisplay('%') : upDisplay('0.1%');
+    }
+};
+document.getElementById('percent').addEventListener('click', insertPercent);
+
 
 const keyboardMap = {
     '0': 'key0',
