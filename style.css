@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;500;900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("bg.png") no-repeat center;
+    background-size: cover;
+    font-size: 32px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    cursor: default;
+}
+
+.container{
+    width: fit-content;
+    background: #1f1f1f;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    padding: 15px;
+}
+
+.content{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
+}
+
+.content .screen{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    grid-column: span 2;
+    background-color: rgba(138, 138, 138, 0.9);
+    padding: 8px;
+}
+
+.content .numpad{
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    gap: 5px;
+    grid-column: span 2;
+    width: 100%;
+}
+
+
+.content .numpad .btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    border-radius: 4px;
+}
+
+.content .numpad #equals{
+    border-radius: 50px;
+    border: none;
+    background-color: #ff7f08;
+    font-size: 24px;
+}
+
+.content .numpad .btns:hover{
+    background-color: #2e2e2e;
+}
+
+.content .numpad #equals:hover{
+    background-color: #d66e0c;
+}
+
+.content .numpad .fas:not(.fa-equals), .content .numpad .op{
+    font-size: 24px;
+    color: #ff7f08;
+}
+
+.content .numpad .op{
+    font-weight: bold;
+}
+
