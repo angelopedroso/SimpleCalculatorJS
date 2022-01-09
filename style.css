@@ -91,3 +91,6 @@ body{
     font-weight: bold;
 }
 
+.content .numpad .fas span{
+    display: none;
+}
