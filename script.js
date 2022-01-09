@@ -3,6 +3,7 @@
 const display = document.getElementById('sc');
 const numbers = document.querySelectorAll('[id*=key]');
 const operators = document.querySelectorAll('[id*=oper]');
+const totalnum = document.getElementById('sc');
 
 let newNum = true;
 let operator;
@@ -13,7 +14,9 @@ const upDisplay = (num) => {
         display.textContent = num;
         newNum = false;
     }else{
-        display.textContent += num;        
+        if (totalnum.textContent.length <= 12) {
+            display.textContent += num;        
+        }
     }
 };
 
@@ -91,3 +94,33 @@ const insertDec = () => {
     }
 };
 document.getElementById('decimal').addEventListener('click', insertDec);
+
+const keyboardMap = {
+    '0': 'key0',
+    '1': 'key1',
+    '2': 'key2',
+    '3': 'key3',
+    '4': 'key4',
+    '5': 'key5',
+    '6': 'key6',
+    '7': 'key7',
+    '8': 'key8',
+    '9': 'key9',
+    ',': 'decimal',
+    '+': 'operplus',
+    '-': 'opermin',
+    '*': 'opermult',
+    '/': 'operdivide',
+    'Enter': 'equals',
+    'Backspace': 'del',
+    'c': 'clear',
+    '%': 'percent'
+}
+
+const keyboardMapper = (e) => {
+    const key = e.key;
+    if (keyboardMap[key]) {
+        document.getElementById(keyboardMap[key]).click();
+    }
+};
+document.addEventListener('keydown', keyboardMapper);
